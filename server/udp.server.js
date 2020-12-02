@@ -1,4 +1,5 @@
 var udp = require('dgram');
+const fs = require('fs');
 
 var server = udp.createSocket('udp4');
 
@@ -12,14 +13,14 @@ server.on('message', function (msg, info) {
     console.log('Received %d bytes from %s:%d\n', msg.length, info.address, info.port);
 
     //sending msg
-    server.send(msg, info.port, 'localhost', function (error) {
-        if (error) {
-            client.close();
-        } else {
-            console.log('Data sent !!!');
-        }
+    // server.send(msg, info.port, 'localhost', function (error) {
+    //     if (error) {
+    //         client.close();
+    //     } else {
+    //         console.log('Data sent !!!');
+    //     }
 
-    });
+    // });
 
 });
 
