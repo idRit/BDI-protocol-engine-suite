@@ -13,6 +13,7 @@
     "@tensorflow/tfjs": "^2.7.0",
     "@tensorflow/tfjs-node": "^2.7.0",
     "audio-decode": "^1.4.0",
-    "flac.js": "^0.2.1"
+    "flac.js": "^0.2.1",
+    "moment": "^2.29.1"
   }
 }

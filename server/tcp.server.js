@@ -2,15 +2,26 @@ const net = require('net');
 const fs = require('fs');
 
 const server = net.createServer(socket => {
-    socket.on('data', data => {
-        console.log(data.toString());
 
-        fs.readFile(__dirname + "/kawaii.flac", { encoding: 'base64' }, async (err, data) => {
-            if (err) console.log(err);
-            // console.log(data.toString());
-            socket.write(data.toString());
-            socket.end();
-        });
+    socket.on('data', data => {
+        let packet = JSON.parse(data.toString());
+
+        if (packet.req == 0)
+            fs.readFile(__dirname + "/kawaii.flac", { encoding: 'base64' }, async (err, data) => {
+                if (err) console.log(err);
+                // console.log(data.toString());
+
+                let obj = {
+                    base64: data.toString(),
+                    timestamp: Date.now(),
+                }
+
+                // console.log("sent at: " + obj.timestamp);
+
+                socket.write(JSON.stringify(obj) + "<>?");
+                socket.end();
+            });
+        else console.log(packet.message);
 
     });
 
